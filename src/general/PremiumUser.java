@@ -4,7 +4,6 @@ public class PremiumUser implements UserBehavior {
 
     private int remainMonths = 0;
 
-
     @Override
     public void createPlaylist(String Title, User Owner) throws InvalidOperationException {
         PlayList playList = new PlayList(Owner, Title);
@@ -26,5 +25,6 @@ public class PremiumUser implements UserBehavior {
         }
         this.remainMonths += month;
     }
+    public int getRemainMonths() {return remainMonths;}
     
 }
