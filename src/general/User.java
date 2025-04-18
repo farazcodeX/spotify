@@ -16,6 +16,13 @@ public class User {
         setUsername(username);
         setPassword(password);
 
+        followers = new ArrayList<>();
+        followings = new ArrayList<>();
+        behavior = new RegularUser();
+        
+
+        allUsers.add(this);
+
     }
     public void setUsername(String username) throws InvalidOperationException {
         if(username == null || username.isEmpty()) {
@@ -36,5 +43,20 @@ public class User {
         } else {
             throw new InvalidOperationException("Password is short : " + pass.length() + "/8" );
         }
+    }
+    public void follow(User user) {
+        if(user != null) {
+            followings.add(user);
+
+        }
+    }
+    public void createPlaylist(String title, User owner) {
+        this.behavior.createPlaylist(title, owner);
+    }
+    public void playMusic(Music music) {
+        this.behavior.playMusic(music);
+    }
+    public void buyPremium(User owner, int month) {
+        this.behavior.buyPremium(owner, month);
     }
 }
