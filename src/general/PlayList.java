@@ -4,7 +4,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class PlayList {
-    public ArrayList<Music> playlist = new ArrayList<>();
+    public ArrayList<Music> playlist;
     private User owner;
     private String title;
 
@@ -19,6 +19,7 @@ public class PlayList {
 
         this.owner = owner;
         this.title = title;
+        playlist = new ArrayList<>();
     }
 
 
@@ -26,18 +27,12 @@ public class PlayList {
         if(newTitle == null || newTitle.isEmpty()) {
             throw new InvalidOperationException("Provided title is empty");
         }
-        if(owner.getPassword().equals(password)) {
-            for(PlayList playList : owner.getPlayLists()) {
-                if(playList.getTitle().equals(newTitle)) {
-                    throw new InvalidOperationException("Inputed new Title : " + newTitle + "  is already in a playlist");
-                }
-            }
-        } else {
-            throw new InvalidOperationException("Provided User Password : doese not match the owner of this playList");
+        if(!owner.getPassword().equals(password)) {
+            throw new InvalidOperationException("password is not correct");
         }
 
-        // at last
-        this.title = newTitle;
+        this.title = title;
+  
     }
 
     public String getTitle() {return title;}
