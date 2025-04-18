@@ -3,7 +3,7 @@ package general;
 public class PremiumUser implements UserBehavior {
 
     private int remainMonths = 0;
-    
+
 
     @Override
     public void createPlaylist(String Title, User Owner) throws InvalidOperationException {
@@ -20,7 +20,10 @@ public class PremiumUser implements UserBehavior {
     }
 
     @Override
-    public void buyPremium(User owner, int month) {
+    public void buyPremium(User owner, int month) throws InvalidOperationException {
+        if (month <= 0) {
+            throw new InvalidOperationException("Invalid month value.");
+        }
         this.remainMonths += month;
     }
     

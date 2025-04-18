@@ -24,7 +24,7 @@ public class RegularUser implements UserBehavior{
     }
 
     @Override
-    public void buyPremium(User owner, int month) {
+    public void buyPremium(User owner, int month) throws InvalidOperationException {
         if(owner != null) {
             PremiumUser user = new PremiumUser();
             user.buyPremium(owner, month);
