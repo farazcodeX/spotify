@@ -45,7 +45,7 @@ public class Music {
 
     private void ifMusicExist(String title, String singer) throws InvalidOperationException {
         for(Music music : allMusics) {
-            if(music.getTitle() == title && music.getSinger().getUsername().equals(singer)) {
+            if(music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)) {
                 throw new InvalidOperationException("Music with title : " + title + "  singer Name : " + singer + "  is already exist");
             }
         }
