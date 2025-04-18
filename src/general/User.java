@@ -15,10 +15,12 @@ public class User {
     public User(String username, String password) throws InvalidOperationException {
         setUsername(username);
         setPassword(password);
-
+        
+        // avoiding null pointer exc
         followers = new ArrayList<>();
         followings = new ArrayList<>();
         behavior = new RegularUser();
+        playlists = new ArrayList<>();
         
 
         allUsers.add(this);
@@ -50,13 +52,17 @@ public class User {
 
         }
     }
-    public void createPlaylist(String title, User owner) {
-        this.behavior.createPlaylist(title, owner);
+    public void createPlaylist(String title, User owner) throws InvalidOperationException {
+            this.behavior.createPlaylist(title, owner);
     }
-    public void playMusic(Music music) {
+    public void playMusic(Music music) throws InvalidOperationException {
         this.behavior.playMusic(music);
     }
     public void buyPremium(User owner, int month) {
         this.behavior.buyPremium(owner, month);
     }
+    public void setBehavior(UserBehavior behavior) {
+        this.behavior = behavior;
+    }
+    public ArrayList<PlayList> getPlayLists() {return playlists;}
 }
