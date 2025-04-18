@@ -10,7 +10,7 @@ public class User {
     private UserBehavior behavior;
     private ArrayList<PlayList> playlists;
 
-    public static ArrayList<User> allUsers = new ArrayList<>();
+    private static ArrayList<User> allUsers = new ArrayList<>();
 
     public User(String username, String password) throws InvalidOperationException {
         setUsername(username);
@@ -37,7 +37,9 @@ public class User {
         this.username = username;
 
     }
+
     public String getUsername() {return username;}
+
     public void setPassword(String pass) throws InvalidOperationException {
         if(pass.length() >= 8) {
             this.password = pass;
@@ -49,20 +51,42 @@ public class User {
     public void follow(User user) {
         if(user != null) {
             followings.add(user);
-
         }
     }
-    public void createPlaylist(String title, User owner) throws InvalidOperationException {
-            this.behavior.createPlaylist(title, owner);
+
+    public String getPassword() {return password;}
+
+    public void createPlaylist(String title) throws InvalidOperationException {
+            this.behavior.createPlaylist(title, this);
     }
     public void playMusic(Music music) throws InvalidOperationException {
         this.behavior.playMusic(music);
     }
-    public void buyPremium(User owner, int month) {
+    public void buyPremium(User owner, int month) throws InvalidOperationException {
         this.behavior.buyPremium(owner, month);
     }
     public void setBehavior(UserBehavior behavior) {
         this.behavior = behavior;
     }
-    public ArrayList<PlayList> getPlayLists() {return playlists;}
+    public ArrayList<PlayList> getPlayLists() {
+        return (new ArrayList<>(playlists));
+    }
+    public static ArrayList<User> getAllUsers() {
+        return (new ArrayList<>(allUsers));
+    }
+    public void showPlayList() throws InvalidOperationException {
+        System.out.println("-------------------------");
+        if(!playlists.isEmpty()) {
+            playlists.stream().forEach(pl -> System.out.println("playList (1) : " +pl.getTitle() + " musics :" +pl.playlist.size()));
+        } else {
+            throw new InvalidOperationException("PlayList is empty");
+        }
+    }
+    public PlayList getPlayListByIndex(int index) throws InvalidOperationException {
+        if(playlists.size() >= index && index > 0) {
+            return playlists.get(index-1);
+        } else {
+            throw new InvalidOperationException("Provided number is incorrect");
+        }
+    }
 }

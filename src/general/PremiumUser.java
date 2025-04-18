@@ -5,13 +5,12 @@ public class PremiumUser implements UserBehavior {
     private int remainMonths = 0;
 
     @Override
-    public void createPlaylist(String Title, User Owner) {
-        PlayList playList = new PlayList();
+    public void createPlaylist(String Title, User Owner) throws InvalidOperationException {
+        PlayList playList = new PlayList(Owner, Title);
         if(Owner.getPlayLists() != null) {
             Owner.getPlayLists().add(playList);
             System.out.println("Playlist : " + Title + " has been created");
         }
-
     }
 
     @Override
@@ -20,8 +19,12 @@ public class PremiumUser implements UserBehavior {
     }
 
     @Override
-    public void buyPremium(User owner, int month) {
+    public void buyPremium(User owner, int month) throws InvalidOperationException {
+        if (month <= 0) {
+            throw new InvalidOperationException("Invalid month value.");
+        }
         this.remainMonths += month;
     }
+    public int getRemainMonths() {return remainMonths;}
     
 }

@@ -44,10 +44,9 @@ public class Music {
     }
 
     private void ifMusicExist(String title, String singer) throws InvalidOperationException {
-        for(Music music : allMusics) {
-            if(music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)) {
-                throw new InvalidOperationException("Music with title : " + title + "  singer Name : " + singer + "  is already exist");
-            }
+        boolean musicExists = allMusics.stream().anyMatch(music -> music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer));
+        if (musicExists) {
+            throw new InvalidOperationException("Music with title: " + title + " by singer: " + singer + " already exists.");
         }
     }
     public ArrayList<Music> search(String title) {
@@ -58,6 +57,7 @@ public class Music {
         return musics;
     }
     public Music search(String title, String singer) {
-       return allMusics.stream().filter(music -> music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)).findAny().orElse(null);
+       return allMusics.stream().filter(music -> music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)).findFirst().orElse(null);
     }    
+
 }
