@@ -51,14 +51,13 @@ public class User {
     public void follow(User user) {
         if(user != null) {
             followings.add(user);
-
         }
     }
 
     public String getPassword() {return password;}
 
-    public void createPlaylist(String title, User owner) throws InvalidOperationException {
-            this.behavior.createPlaylist(title, owner);
+    public void createPlaylist(String title) throws InvalidOperationException {
+            this.behavior.createPlaylist(title, this);
     }
     public void playMusic(Music music) throws InvalidOperationException {
         this.behavior.playMusic(music);
@@ -74,5 +73,20 @@ public class User {
     }
     public static ArrayList<User> getAllUsers() {
         return (new ArrayList<>(allUsers));
+    }
+    public void showPlayList() throws InvalidOperationException {
+        System.out.println("-------------------------");
+        if(!playlists.isEmpty()) {
+            playlists.stream().forEach(pl -> System.out.println("playList (1) : " +pl.getTitle() + " musics :" +pl.playlist.size()));
+        } else {
+            throw new InvalidOperationException("PlayList is empty");
+        }
+    }
+    public PlayList getPlayListByIndex(int index) throws InvalidOperationException {
+        if(playlists.size() >= index && index > 0) {
+            return playlists.get(index-1);
+        } else {
+            throw new InvalidOperationException("Provided number is incorrect");
+        }
     }
 }

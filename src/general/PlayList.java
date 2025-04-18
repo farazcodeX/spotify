@@ -4,7 +4,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class PlayList {
-    private ArrayList<Music> playlist = new ArrayList<>();
+    public ArrayList<Music> playlist = new ArrayList<>();
     private User owner;
     private String title;
 
