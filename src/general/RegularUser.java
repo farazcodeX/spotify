@@ -21,7 +21,6 @@ public class RegularUser implements UserBehavior{
         } else {
             throw new InvalidOperationException("you can only stream 5 music : for more : buy soptify permium");
         }
-
     }
 
     @Override
@@ -29,12 +28,6 @@ public class RegularUser implements UserBehavior{
         if(owner != null) {
             owner.setBehavior(new PremiumUser());
             System.out.println("User :  " + owner.getUsername() + " Upgraded to Permium : time left : " + month + " months");
-            
-
         }
-
-
-
     }
-    
 }

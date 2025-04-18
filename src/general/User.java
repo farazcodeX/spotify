@@ -15,10 +15,12 @@ public class User {
     public User(String username, String password) throws InvalidOperationException {
         setUsername(username);
         setPassword(password);
-
+        
+        // avoiding null pointer exc
         followers = new ArrayList<>();
         followings = new ArrayList<>();
         behavior = new RegularUser();
+        playlists = new ArrayList<>();
         
 
         allUsers.add(this);
@@ -62,4 +64,5 @@ public class User {
     public void setBehavior(UserBehavior behavior) {
         this.behavior = behavior;
     }
+    public ArrayList<PlayList> getPlayLists() {return playlists;}
 }
