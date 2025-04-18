@@ -12,28 +12,27 @@ public class Music {
     private static ArrayList<Music> allMusics = new ArrayList<>();
 
     public Music(String title, User singer) throws InvalidOperationException {
-        setSinger(singer);
-        setTitle(title);
         ifMusicExist(title, singer.getUsername());
+
+        
+        setTitle(title);
+        this.singer = singer;
         numberOfStream = 0;
 
         allMusics.add(this);
 
     }
+
     public void setTitle(String title) throws InvalidOperationException {
         if(title == null || title.isEmpty()) {
             throw new InvalidOperationException("Provided Title is empty");
-
         }
 
         this.title = title;
     }
-    public void setSinger(User user) throws InvalidOperationException {
-        if(user == null) {
-            throw new InvalidOperationException("User -> Singer is empty");
-        }
-        this.singer = user;
-    }
+
+
+
     public String getTitle() {return title;}
     public User getSinger() {return singer;}
 
@@ -41,6 +40,7 @@ public class Music {
         ++numberOfStream;
         System.out.println("---------------");
         System.out.println("Music :  " + title + "\n Singer : " + singer.getUsername() + "\n  Streams : " + numberOfStream);
+        System.out.println();
     }
 
     private void ifMusicExist(String title, String singer) throws InvalidOperationException {
@@ -49,6 +49,7 @@ public class Music {
             throw new InvalidOperationException("Music with title: " + title + " by singer: " + singer + " already exists.");
         }
     }
+
     public ArrayList<Music> search(String title) {
         ArrayList<Music> musics = new ArrayList<>();
         
@@ -56,8 +57,13 @@ public class Music {
 
         return musics;
     }
-    public Music search(String title, String singer) {
-       return allMusics.stream().filter(music -> music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)).findFirst().orElse(null);
-    }    
 
+    public Music search(String title, String singer) {
+        for(Music music : allMusics) {
+            if(music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)) {
+                return music;
+            }
+        }
+        return null;
+    }    
 }

@@ -2,15 +2,17 @@ package general;
 
 public class PremiumUser implements UserBehavior {
 
-    private int remainMonths = 0;
+    private int remainMonths;
+
+    public PremiumUser(int month) {
+        this.remainMonths = month;
+    }
 
     @Override
     public void createPlaylist(String Title, User Owner) throws InvalidOperationException {
         PlayList playList = new PlayList(Owner, Title);
-        if(Owner.getPlayLists() != null) {
             Owner.getPlayLists().add(playList);
             System.out.println("Playlist : " + Title + " has been created");
-        }
     }
 
     @Override
@@ -24,6 +26,8 @@ public class PremiumUser implements UserBehavior {
             throw new InvalidOperationException("Invalid month value.");
         }
         this.remainMonths += month;
+        System.out.println("your premium account has been renewed for " + month + " month");
+
     }
     public int getRemainMonths() {return remainMonths;}
     

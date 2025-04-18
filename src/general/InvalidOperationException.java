@@ -1,6 +1,6 @@
 package general;
 
-public class InvalidOperationException extends Exception{
+public class InvalidOperationException extends RuntimeException{
     public InvalidOperationException() {
         super();
     }
