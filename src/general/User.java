@@ -90,6 +90,10 @@ public class User {
 
     public String getPassword() {return password;}
 
+    public ArrayList<User> getFollowersList() {return followers;}
+    public ArrayList<User> getFollowingsList() {return followings;}
+
+
     public void createPlaylist(String title) throws InvalidOperationException {
             this.behavior.createPlaylist(title, this);
     }
@@ -125,7 +129,7 @@ public class User {
     public String toString() {
         return this.username;
     }
-    public PlayList searchPlaylist(String name) {
+    public PlayList getPlaylistByName(String name) {
         if(playlists.isEmpty()) {
             throw new InvalidOperationException("PlayList is empty");
         }

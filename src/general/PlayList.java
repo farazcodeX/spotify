@@ -2,11 +2,14 @@ package general;
 
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PlayList {
     public ArrayList<Music> playlist = new ArrayList<>();
     private User owner;
     private String title;
+
+    Scanner scanner = new Scanner(System.in);
 
     public PlayList(User owner, String title) throws InvalidOperationException {
         if(owner == null) {
@@ -72,10 +75,14 @@ public class PlayList {
         .findFirst().orElse(null);
     }
     public void playPlayList() {
-        int index = 0;
-        while(index < playlist.size()) {
-            playlist.get(index).play();
-            ++index;
+        for(Music music : playlist) {
+            owner.playMusic(music);
+            System.out.println("Stop : press space / next music : any key");
+            String choice = scanner.nextLine();
+            if(choice.equals(" ")) {
+                System.out.println("Paused");
+                return;
+            }
         }
     }
 }
