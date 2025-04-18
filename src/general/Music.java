@@ -60,4 +60,5 @@ public class Music {
     public Music search(String title, String singer) {
        return allMusics.stream().filter(music -> music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)).findAny().orElse(null);
     }    
+
 }

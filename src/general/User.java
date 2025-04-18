@@ -37,7 +37,9 @@ public class User {
         this.username = username;
 
     }
+
     public String getUsername() {return username;}
+
     public void setPassword(String pass) throws InvalidOperationException {
         if(pass.length() >= 8) {
             this.password = pass;
@@ -52,6 +54,9 @@ public class User {
 
         }
     }
+
+    public String getPassword() {return password;}
+    
     public void createPlaylist(String title, User owner) throws InvalidOperationException {
             this.behavior.createPlaylist(title, owner);
     }
