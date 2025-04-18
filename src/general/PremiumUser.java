@@ -3,6 +3,7 @@ package general;
 public class PremiumUser implements UserBehavior {
 
     private int remainMonths = 0;
+    
 
     @Override
     public void createPlaylist(String Title, User Owner) throws InvalidOperationException {

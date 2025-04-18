@@ -10,7 +10,7 @@ public class User {
     private UserBehavior behavior;
     private ArrayList<PlayList> playlists;
 
-    public static ArrayList<User> allUsers = new ArrayList<>();
+    private static ArrayList<User> allUsers = new ArrayList<>();
 
     public User(String username, String password) throws InvalidOperationException {
         setUsername(username);
@@ -56,7 +56,7 @@ public class User {
     }
 
     public String getPassword() {return password;}
-    
+
     public void createPlaylist(String title, User owner) throws InvalidOperationException {
             this.behavior.createPlaylist(title, owner);
     }
@@ -69,5 +69,10 @@ public class User {
     public void setBehavior(UserBehavior behavior) {
         this.behavior = behavior;
     }
-    public ArrayList<PlayList> getPlayLists() {return playlists;}
+    public ArrayList<PlayList> getPlayLists() {
+        return (new ArrayList<>(playlists));
+    }
+    public static ArrayList<User> getAllUsers() {
+        return (new ArrayList<>(allUsers));
+    }
 }
