@@ -50,7 +50,7 @@ public class Music {
         }
     }
 
-    public ArrayList<Music> search(String title) {
+    public static ArrayList<Music> search(String title) {
         ArrayList<Music> musics = new ArrayList<>();
         
         allMusics.stream().filter(music -> music.getTitle().equals(title)).forEach(music -> musics.add(music));
@@ -58,7 +58,7 @@ public class Music {
         return musics;
     }
 
-    public Music search(String title, String singer) {
+    public static Music search(String title, String singer) {
         for(Music music : allMusics) {
             if(music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer)) {
                 return music;

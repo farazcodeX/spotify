@@ -1,5 +1,6 @@
 package general;
 
+import java.lang.reflect.InaccessibleObjectException;
 import java.util.ArrayList;
 
 public class User {
@@ -106,11 +107,11 @@ public class User {
     }
 
     public ArrayList<PlayList> getPlayLists() {
-        return (new ArrayList<>(playlists));
+        return playlists;
     }
 
     public static ArrayList<User> getAllUsers() {
-        return (new ArrayList<>(allUsers));
+        return allUsers;
     }
 
     public PlayList getPlayListByIndex(int index) throws InvalidOperationException {
@@ -123,6 +124,17 @@ public class User {
     @Override
     public String toString() {
         return this.username;
+    }
+    public PlayList searchPlaylist(String name) {
+        if(playlists.isEmpty()) {
+            throw new InvalidOperationException("PlayList is empty");
+        }
+        for(PlayList pl : playlists) {
+            if(pl.getTitle().equals(name)) {
+                return pl;
+            }
+        }
+        throw new InvalidOperationException("PLaylist not found");
     }
 
 }

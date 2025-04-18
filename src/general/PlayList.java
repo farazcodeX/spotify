@@ -4,7 +4,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class PlayList {
-    public ArrayList<Music> playlist;
+    public ArrayList<Music> playlist = new ArrayList<>();
     private User owner;
     private String title;
 
@@ -66,6 +66,10 @@ public class PlayList {
             }
         }
         return result;
+    }
+    public Music searchInPlaylist(String title, String singer) {
+        return playlist.stream().filter(music  -> music.getTitle().equals(title) && music.getSinger().getUsername().equals(singer))
+        .findFirst().orElse(null);
     }
     public void playPlayList() {
         int index = 0;
